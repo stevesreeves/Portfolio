@@ -1,67 +1,16 @@
-#a module - contains classes as well as its own variables
-# needs to be imported and referred to by "import agentframework"
-#usually single files to do a set of jobs
-#modules are imported whilst scripts generally run directly
-#packages are collections of modules, with a namespace (a unique way of referring to them)
+'''agentframework module'''
+
+#agent framework.py is a module containing the classes and variables defining
+# how the agents of the model behave.
+#agentframework.py is imported into, and referred to by, the agent based model
 
 
-#agentframework.py is imported into the model
-
-
-
+#import random, library to generate random number
 import random
 
-#class Agent ():
-   #def __init__ (self):
-    #    self._x = None
-     #   self._y = None
-   #     self.randomize()
-  #      
-    #def getx(self):
-       # return self._x
-        
-    #def gety(self):
-   #     return self._y
-    
-    #def setx(self, value):
-   #     self._x = value
-        
-    #def sety(self, value):
- #       self._y = value
-        
-    #def delx(self):
- #       del self._x
-    
-   # def dely(self):
- #       del self._y
-        
-        
- #   x = property(getx, setx, delx, "I'm the 'x' property.")   
-  #  y = property(gety, sety, dely, "I'm the 'y' property.")  
-        
- #   def randomize (self):
- #       self._x = random.randint(0,99)
- #       self._y = random.randint(0,99)
-        
-        
-        
- #   def move (self):
-        
-    #    if random.random() < 0.5:
-  #          self._x = (self._x + 1) % 100
-#        else:
-  #         self._x = (self._x - 1) % 100
-
- #       if random.random() < 0.5:
-  #          self._y = (self._y + 1) % 100
-  #      else:
-            #self._y = (self._y - 1) % 100
-  
-
-
-    
-
-#define Agent class and class behaviour
+#Defining Agent class and class behaviour.
+#Generating random integers between 0 and 99,
+# to represent coordinates on a 100x100 grid.
 class Agent():
     def __init__ (self, environment, agents, x = None, y = None):
         if (x == None):
@@ -73,7 +22,8 @@ class Agent():
             self.y=random.randint(0,99)
         else:
             self.y=y
-   # "== None!" etc allows for X and Y value to be absent, substitutes in a random integer
+# "== None" etc allows for X and Y value to be absent, 
+#substitutes in a random integer, eliminating error
         self.environment = environment
         self.agents = agents
         self.store = 0
@@ -95,7 +45,7 @@ class Agent():
             self.environment [self.y][self.x]-=10
             self.store+=10
             
-    #adding sharing function to set up agent communication   
+#adding sharing function to set up inter-agent communication within environment
     def share_with_neighbours(self, neighbourhood):
         for agent in self.agents:
             dist = self.distance_between(agent)
