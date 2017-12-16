@@ -23,28 +23,34 @@ Created on Tue Oct 31 11:27:23 2017
 
 
 #web scraping X Y data
+#request library allows for fetching of HTTP
 import requests
+#"beautiful soup" library facilitates screen-scraping from webpage and converts into UTF-8
 import bs4
 
+
+#stating webpage to scrape for data
 r = requests.get('http://www.geog.leeds.ac.uk/courses/computing/practicals/python/agent-framework/part9/data.html')
 content = r.text
 soup = bs4.BeautifulSoup(content, 'html.parser')
 td_ys = soup.find_all(attrs={"class" : "y"})
 td_xs = soup.find_all(attrs={"class" : "x"})
-print(td_ys)
+print(td_ys) #displaying coordinates
 print(td_xs)
 
 
 
 #importing other libraries used for model
+
+#libraries for building GUI 
+#tkinter is a object-oriented package for construcing GUIs
 import tkinter
 import matplotlib.backends.backend_tkagg
-
-#import this matlibplot before any other improt of matplotlib:
+#import this matplotlib before any other import of matplotlib
+#matplotlib plots onto a 2D frame
 import matplotlib 
 
-
-#improting library responsible for production of random integers:
+#importing library responsible for production of random integers:
 import random
 
 import matplotlib.pyplot
@@ -52,7 +58,7 @@ import matplotlib.pyplot
 #importing animating library for model:
 import matplotlib.animation 
 
-#importing file containing agents information and behaviour:
+#importing module agentframework.py file containing agents information and behaviour:
 import agentframework  
 
 #library for using .csv and .txt files:
@@ -76,19 +82,17 @@ neighbourhood = 20
 agents = []
 environment = []
 
-#defining sizze of model plot:
+#defining size of model plot:
 fig = matplotlib.pyplot.figure(figsize=(7, 7))
 ax = fig.add_axes([0, 0, 1, 1])
 ax.set_autoscale_on(False)
 
 
-
-#read in .txt file, using csv library
+#read in .txt file, using imported csv library
 f = open('in.txt', newline='')
 reader = csv.reader(f, quoting = csv.QUOTE_NONNUMERIC)
 
-
-#reader reads file one line at a time, inputting it into rowlist array
+#reader reads file one line at a time, inputting it into "rowlist" array
 for row in reader: 
         rowlist = []
         for item in row:
@@ -126,11 +130,10 @@ def update(frame_number):
     
     fig.clear()   
     global carry_on
-
-
     matplotlib.pyplot.imshow(environment)
     
-#Shuffling list of agents before each iteration, meaning there is no chance of picking identical agent again
+#Shuffling list of agents before each iteration, meaning there is no chance of 
+#picking an identical agent again
     random.shuffle(agents) 
     for i in range(num_of_agents):
         agents[i].move()
@@ -138,9 +141,10 @@ def update(frame_number):
         agents[i].share_with_neighbours(neighbourhood)
      
           
-#Constructing stopping fucntion for animation. 
+#Constructing stopping function for animation. 
 #If the random number produced is less than 0.1, stopping function is fulfilled.
 #No further iterations of agent based model occur after stopping function.
+#This reduces error by catching exceptions
     
     
     if random.random() < 0.1:
@@ -167,6 +171,8 @@ def run():
     animation = matplotlib.animation.FuncAnimation(fig, update, frames=gen_function, repeat=False)
     canvas.show()
 
+
+#building model GUI window with menu
 root = tkinter.Tk() 
 root.wm_title("Model")
 canvas = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(fig, master=root)
@@ -174,8 +180,8 @@ canvas._tkcanvas.pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 menu_bar = tkinter.Menu(root)
 root.config(menu=menu_bar)
 model_menu = tkinter.Menu(menu_bar)
-menu_bar.add_cascade(label="Model", menu=model_menu)
-model_menu.add_command(label="Run model", command=run) 
+menu_bar.add_cascade(label="Model", menu=model_menu) #menu with drop-down option to run the model
+model_menu.add_command(label="Run model", command=run)
 tkinter.mainloop()
 
 
