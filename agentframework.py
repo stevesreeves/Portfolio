@@ -60,8 +60,4 @@ class Agent():
         return (((self.x - agent.x)**2) + ((self.y)**2))**0.5
     
     
-
-
-
-
-       
+    
