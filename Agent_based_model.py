@@ -88,13 +88,13 @@ for row in reader:
 f.close()
 
 
-#pythagoras equation, establishing distance between given agents
+#function for pythagoras equation, establishing distance between given agents
 def distance_between(agent0, agent1):
    return (((agent0.x - agent1.x)**2) + ((agent0.y - agent1.y)**2))**0.5
 # ** = square root of the sum of the difference between the agents
    
 
-# Making the agents:
+#Funtion making the agents:
 for i in range(num_of_agents):
     y = int(td_ys[i].text)
     x = int(td_xs[i].text)
