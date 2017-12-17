@@ -73,7 +73,7 @@ def getTimeMS():
 
 start = getTimeMS()
 
-#declaring variables for model:
+#declaring the variables for the model:
 num_of_agents = 10
 num_of_iterations = 100
 neighbourhood = 20
@@ -92,7 +92,7 @@ ax.set_autoscale_on(False)
 f = open('in.txt', newline='')
 reader = csv.reader(f, quoting = csv.QUOTE_NONNUMERIC)
 
-#reader reads file one line at a time, inputting it into "rowlist" array
+#reader reads in.txt file one line at a time, inputting it into "rowlist" array
 for row in reader: 
         rowlist = []
         for item in row:
@@ -113,7 +113,7 @@ for i in range(num_of_agents):
     x = int(td_xs[i].text)
     agents.append(agentframework.Agent(environment, agents, y, x))
      
-#plotting agent based model output on graph on  a 100x100 grid, using matplotlib  library
+#plotting agent based model output on matplotlib graph on to a 100x100 grid - x and y axis limits set as 0 to 99
 matplotlib.pyplot.xlim(0, 99)
 matplotlib.pyplot.ylim(0, 99)
 
@@ -164,7 +164,7 @@ def gen_function(b = [0]):
         yield a			#Returns control and awaits next call by model
         a = a + 1
         
-        
+#animating fucntion from matplotlib library
 animation = matplotlib.animation.FuncAnimation(fig, update, interval=1, repeat=False, frames=num_of_iterations)
 
 def run():
@@ -181,7 +181,7 @@ menu_bar = tkinter.Menu(root)
 root.config(menu=menu_bar)
 model_menu = tkinter.Menu(menu_bar)
 menu_bar.add_cascade(label="Model", menu=model_menu) #menu with drop-down option to run the model
-model_menu.add_command(label="Run model", command=run)
+model_menu.add_command(label="Run model", command=run) #"run model" option selection wihtin menu
 tkinter.mainloop()
 
 
@@ -190,3 +190,4 @@ tkinter.mainloop()
 end = getTimeMS()
 #displaying runtime of model
 print("time = " + str(end - start))
+
