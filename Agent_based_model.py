@@ -1,18 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec  5 14:18:44 2017
-
-@author: gy17sms
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 21 14:27:03 2017
-
-@author: gy17sms
-"""
-
-# -*- coding: utf-8 -*-
 """
 Created on Tue Oct 31 11:27:23 2017
 
@@ -22,14 +7,16 @@ Created on Tue Oct 31 11:27:23 2017
 '''Agent Based Model'''
 
 
-#web scraping X Y data
-#request library allows for fetching of HTTP
+"""
+The request library allows for fetching of HTTP, "web-scraping" the X Y data
+from the webpage
+"""
 import requests
 #"beautiful soup" library facilitates screen-scraping from webpage and converts into UTF-8
 import bs4
 
 
-#stating webpage to scrape for data
+# r is stating webpage to scrape for data
 r = requests.get('http://www.geog.leeds.ac.uk/courses/computing/practicals/python/agent-framework/part9/data.html')
 content = r.text
 soup = bs4.BeautifulSoup(content, 'html.parser')
@@ -113,11 +100,12 @@ for i in range(num_of_agents):
     x = int(td_xs[i].text)
     agents.append(agentframework.Agent(environment, agents, y, x))
      
-#plotting agent based model output on matplotlib graph on to a 100x100 grid - x and y axis limits set as 0 to 99
+#Plotting agent based model output on matplotlib graph on to a 100x100 grid
+#x and y axis limits set as 0 to 99
 matplotlib.pyplot.xlim(0, 99)
 matplotlib.pyplot.ylim(0, 99)
 
-#matplotlib.pyplot.show() #replace with canvas show
+#matplotlib.pyplot.show() #replace with canvas show, 
 
 
 ###################
@@ -132,6 +120,7 @@ def update(frame_number):
     global carry_on
     matplotlib.pyplot.imshow(environment)
     
+
 #Shuffling list of agents before each iteration, meaning there is no chance of 
 #picking an identical agent again
     random.shuffle(agents) 
@@ -140,7 +129,7 @@ def update(frame_number):
         agents[i].eat()
         agents[i].share_with_neighbours(neighbourhood)
      
-          
+         
 #Constructing stopping function for animation. 
 #If the random number produced is less than 0.1, stopping function is fulfilled.
 #No further iterations of agent based model occur after stopping function.
